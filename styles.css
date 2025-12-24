@@ -857,6 +857,294 @@ footer {
   transition-delay: 0.8s;
 }
 
+/* ===== Skills Section ===== */
+.skills-section {
+  margin-top: var(--space-xl);
+  position: relative;
+}
+
+.skills-section h4 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-lg);
+  color: var(--dark);
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.skills-section h4::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+}
+
+.skills-carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-md) 0;
+  overflow: hidden;
+}
+
+.skills-carousel {
+  position: relative;
+  width: 100%;
+  padding: var(--space-sm) 0;
+}
+
+.skills-track {
+  display: flex;
+  gap: var(--space-md);
+  width: max-content;
+  animation: scrollSkills 40s linear infinite;
+  will-change: transform;
+  padding: var(--space-sm) 0;
+}
+
+.skill-card {
+  flex: 0 0 160px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: var(--space-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(74, 66, 232, 0.1) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  margin-bottom: var(--space-sm);
+  color: var(--white);
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+}
+
+.skill-card:hover .skill-icon {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+}
+
+.skill-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark);
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-name {
+  color: var(--primary);
+  transform: translateY(3px);
+}
+
+.skill-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.skill-card:hover .skill-wave {
+  transform: scaleX(1);
+}
+
+/* Skill-specific colors */
+.skill-card[data-skill="python"] .skill-icon {
+  background: linear-gradient(135deg, #3776AB, #FFD43B);
+}
+.skill-card[data-skill="javascript"] .skill-icon {
+  background: linear-gradient(135deg, #F7DF1E, #000000);
+}
+.skill-card[data-skill="html"] .skill-icon {
+  background: linear-gradient(135deg, #E34F26, #F06529);
+}
+.skill-card[data-skill="css"] .skill-icon {
+  background: linear-gradient(135deg, #2965f1, #EBEBEB);
+}
+.skill-card[data-skill="flask"] .skill-icon {
+  background: linear-gradient(135deg, #000000, #FFFFFF);
+}
+.skill-card[data-skill="mongodb"] .skill-icon {
+  background: linear-gradient(135deg, #47A248, #B8C4C2);
+}
+.skill-card[data-skill="ml"] .skill-icon {
+  background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+}
+.skill-card[data-skill="ai"] .skill-icon {
+  background: linear-gradient(135deg, #00C9FF, #92FE9D);
+}
+.skill-card[data-skill="api"] .skill-icon {
+  background: linear-gradient(135deg, #6A11CB, #2575FC);
+}
+.skill-card[data-skill="git"] .skill-icon {
+  background: linear-gradient(135deg, #F05032, #F8F8F8);
+}
+
+/* Animation for continuous right-to-left scrolling */
+@keyframes scrollSkills {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - var(--space-md)));
+  }
+}
+
+/* Navigation buttons */
+.skills-carousel-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.skill-nav-btn {
+  pointer-events: all;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: none;
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-nav-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+/* Pause animation on hover */
+.skills-carousel:hover .skills-track {
+  animation-play-state: paused;
+}
+
+/* Floating animation */
+@keyframes floatSkill {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.skill-card {
+  animation: floatSkill 4s ease-in-out infinite;
+}
+
+.skill-card:nth-child(2n) {
+  animation-delay: 0.5s;
+}
+.skill-card:nth-child(3n) {
+  animation-delay: 1s;
+}
+.skill-card:nth-child(4n) {
+  animation-delay: 1.5s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .skill-card {
+    flex: 0 0 140px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-card {
+    flex: 0 0 120px;
+    height: 140px;
+  }
+  
+  .skill-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+  }
+  
+  .skill-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-card {
+    flex: 0 0 100px;
+    height: 120px;
+    padding: var(--space-sm);
+  }
+  
+  .skill-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .skill-name {
+    font-size: 0.8rem;
+  }
+  
+  .skills-track {
+    gap: var(--space-sm);
+  }
+}
 /* ===== Responsive Styles ===== */
 @media (max-width: 1024px) {
   .about-content,
@@ -1014,5 +1302,575 @@ footer {
     font-size: 1rem;
     bottom: 1rem;
     right: 1rem;
+  }
+}
+/* ===== Certifications Section ===== */
+.certifications {
+  background-color: #f9f9ff;
+}
+
+.certifications-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.certification-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.certification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  transition: all 0.3s ease;
+}
+
+.certification-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.certification-card:hover::before {
+  width: 8px;
+}
+
+.certification-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.certification-card:hover .certification-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.certification-content h3 {
+  font-size: 1.2rem;
+  color: var(--dark);
+  margin-bottom: var(--space-xs);
+}
+
+.certification-content h4 {
+  font-size: 0.9rem;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+
+.certification-content p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ===== Achievements Section ===== */
+.achievements {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+}
+
+.achievements-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.achievement-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.achievement-card:hover::after {
+  transform: scaleX(1);
+}
+
+.achievement-badge {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.achievement-card:hover .achievement-badge {
+  transform: scale(1.1) rotate(15deg);
+}
+
+.achievement-content h3 {
+  font-size: 1.2rem;
+  color: var(--dark);
+  margin-bottom: var(--space-xs);
+}
+
+.achievement-content p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: var(--space-xs);
+}
+
+.achievement-date {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--primary);
+  background: rgba(108, 99, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+}
+
+/* ===== Education Section ===== */
+.education {
+  background-color: var(--white);
+}
+
+.education-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.education-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(108, 99, 255, 0.1);
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+.education-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 2rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.education-card:hover .education-icon {
+  transform: scale(1.1);
+}
+
+.education-content h3 {
+  font-size: 1.4rem;
+  color: var(--dark);
+  margin-bottom: var(--space-xs);
+}
+
+.education-content h4 {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.education-content p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: var(--space-xs);
+}
+
+.education-date {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* Update the project card styles in styles.css */
+/* Replace the existing projects-slider and related styles with this */
+.projects-slider {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+  will-change: transform;
+  padding: 1rem 0;
+  touch-action: manipulation;
+}
+
+/* Add seamless looping by duplicating the cards in JavaScript */
+.projects-slider::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  width: 100px; /* Adjust as needed */
+}
+
+/* Adjust the animation to account for duplicated content */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 1rem)); /* Adjusted for seamless loop */
+  }
+}
+
+/* Make sure the container hides overflow */
+.projects-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.project-card {
+  flex: 0 0 calc(100vw - 4rem);
+  max-width: 300px; /* Reduced from 400px */
+  min-height: 200px; /* Reduced from 250px */
+}
+
+.project-image {
+  height: 140px; /* Reduced from 180px */
+}
+
+.project-info h3 {
+  font-size: 1.1rem; /* Reduced from 1.3rem */
+}
+
+.project-info p {
+  font-size: 0.85rem; /* Reduced from 0.95rem */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .certifications-container,
+  .achievements-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .education-icon {
+    margin-bottom: var(--space-md);
+  }
+}
+/* ===== Project Modals ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: var(--light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  border: 2px solid var(--primary);
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.modal-close:hover {
+  background: var(--secondary);
+  transform: rotate(90deg);
+}
+
+.modal-content {
+  padding: 2rem;
+}
+
+.modal-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.modal-header h2 {
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.modal-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modal-tags span {
+  padding: 0.3rem 0.8rem;
+  background: rgba(127, 90, 240, 0.2);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.modal-body {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-image {
+  flex: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  min-height: 400px;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.modal-image:hover img {
+  transform: scale(1.05);
+}
+
+.modal-text {
+  flex: 1;
+  color: var(--gray);
+}
+
+.modal-text h3 {
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.modal-text h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+}
+
+.modal-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.modal-features {
+  margin: 2rem 0;
+}
+
+.feature {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(127, 90, 240, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(127, 90, 240, 0.1);
+  transform: translateX(5px);
+}
+
+.feature i {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-top: 0.3rem;
+}
+
+.feature h4 {
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.modal-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(127, 90, 240, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.modal-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .modal-body {
+    flex-direction: column;
+  }
+  
+  .modal-image {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 95%;
+    padding: 1rem;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .modal-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .modal-links {
+    flex-direction: column;
   }
 }
